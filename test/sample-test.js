@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { findBookings } from '../src/user-functions';
+import { findBookings, calculateSpending } from '../src/user-functions';
 const expect = chai.expect;
 
 
@@ -29,5 +29,41 @@ describe('findBookings', () => {
     user = { 'id': 4 }; 
     const userBookings = findBookings(user, bookings);
     expect(userBookings).to.deep.equal([]);
+  });
+});
+
+describe('calculateSpending', () => {
+  let user;
+  let bookings;
+  let rooms;
+
+  beforeEach(() => {
+    user = { id: 1 };
+    bookings = [
+      { id: 1, userID: 1, roomNumber: 101 },
+      { id: 2, userID: 1, roomNumber: 102 },
+    ];
+    rooms = [
+      { number: 101, costPerNight: 100 },
+      { number: 102, costPerNight: 150 },
+    ];
+  });
+
+  it('should calculate the total spending for a user', () => {
+    const totalSpending = calculateSpending(user, bookings, rooms);
+    expect(totalSpending).to.equal(250);
+  });
+
+  it('should return 0 if the user has no bookings', () => {
+    user = { id: 2 };
+    const totalSpending = calculateSpending(user, bookings, rooms);
+    expect(totalSpending).to.equal(0);
+  });
+
+  it('should return 0 if there are no matching rooms for the bookings', () => {
+    bookings[0].roomNumber = 103;
+    bookings[1].roomNumber = 104;
+    const totalSpending = calculateSpending(user, bookings, rooms);
+    expect(totalSpending).to.equal(0);
   });
 });
