@@ -8,6 +8,13 @@ const checkAvailability = (bookings, rooms, date) => {
   return availableRooms
 }
 
+const filterByRoomType = (availableRooms, type) => {
+  let filteredRooms =  availableRooms.filter(room => {return room['roomType'] == type.replaceAll('-', ' ')})
+  return filteredRooms
+}
+
+
 export {
   checkAvailability,
+  filterByRoomType
 }

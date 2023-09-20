@@ -1,6 +1,6 @@
 import chai from 'chai';
 import { findBookings, calculateSpending } from '../src/user-functions';
-import { checkAvailability } from '../src/booking-functions';
+import { checkAvailability, filterByRoomType } from '../src/booking-functions';
 const expect = chai.expect;
 
 
@@ -107,5 +107,37 @@ describe('checkAvailability', () => {
     date = '2023/09/20'; 
     const availableRooms = checkAvailability(bookings, rooms, date);
     expect(availableRooms).to.deep.equal([]);
+  });
+});
+
+describe('filterByRoomType', () => {
+  let availableRooms;
+
+  beforeEach(() => {
+    availableRooms = [
+      { number: 101, roomType: 'standard' },
+      { number: 102, roomType: 'deluxe' },
+      { number: 103, roomType: 'suite' },
+      { number: 104, roomType: 'standard suite' },
+    ];
+  });
+
+  it('should return rooms of the specified type', () => {
+    const filteredRooms = filterByRoomType(availableRooms, 'deluxe');
+    expect(filteredRooms).to.deep.equal([
+      { number: 102, roomType: 'deluxe' },
+    ]);
+  });
+
+  it('should handle room type with hyphen', () => {
+    const filteredRooms = filterByRoomType(availableRooms, 'standard-suite');
+    expect(filteredRooms).to.deep.equal([
+      { number: 104, roomType: 'standard suite' },
+    ]);
+  });
+
+  it('should return an empty array if no rooms match the specified type', () => {
+    const filteredRooms = filterByRoomType(availableRooms, 'non-existent-type');
+    expect(filteredRooms).to.deep.equal([]);
   });
 });
