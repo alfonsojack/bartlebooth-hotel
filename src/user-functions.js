@@ -26,8 +26,27 @@ const removeCustomerPrefix = (input) => {
   return userID;
 }
 
+const getUser = (userID, users) => {  
+  let gotUser = users.find(user => {return user['id'] == userID});
+  return gotUser
+}
+
+const handleLogin = (username, password, users) => {
+  let userID = removeCustomerPrefix(username);
+  let loggedUser = getUser(userID, users); 
+  if (password !== 'overlook2021') {
+    return `Invalid password`
+  } else if (loggedUser == undefined) {
+    return `Invalid username`
+  } else {
+    return loggedUser
+  }
+}
+
 export {
   findBookings,
   calculateSpending,
-  removeCustomerPrefix
+  removeCustomerPrefix, 
+  getUser,
+  handleLogin
 }

@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { findBookings, calculateSpending, removeCustomerPrefix } from '../src/user-functions';
+import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from '../src/user-functions';
 import { checkAvailability, filterByRoomType, createUniqueID, bookRoom } from '../src/booking-functions';
 const expect = chai.expect;
 
@@ -218,5 +218,62 @@ describe('removeCustomerPrefix', () => {
     input = 'user123'; 
     const result = removeCustomerPrefix(input);
     expect(result).to.equal('user123');
+  });
+});
+
+describe('getUser', () => {
+  let users;
+
+  beforeEach(() => {
+    users = [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+      { id: 3, name: 'Charlie' },
+    ];
+  });
+
+  it('should return the user with the specified ID', () => {
+    const userID = '2';
+    const user = getUser(userID, users);
+    expect(user).to.deep.equal({ id: 2, name: 'Bob' });
+  });
+
+  it('should return undefined if the user with the specified ID is not found', () => {
+    const userID = 4;
+    const user = getUser(userID, users);
+    expect(user).to.equal(undefined);
+  });
+});
+
+describe('handleLogin', () => {
+  let users;
+
+  beforeEach(() => {
+    users = [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+      { id: 3, name: 'Charlie' },
+    ];
+  });
+
+  it('should return the user object when valid username and password are provided', () => {
+    const username = 'customer1';
+    const password = 'overlook2021';
+    const result = handleLogin(username, password, users);
+    expect(result).to.deep.equal({ id: 1, name: 'Alice' });
+  });
+
+  it('should return "Invalid password" when an invalid password is provided', () => {
+    const username = 'customer2';
+    const password = 'incorrectPassword';
+    const result = handleLogin(username, password, users);
+    expect(result).to.equal('Invalid password');
+  });
+
+  it('should return "Invalid username" when an invalid username is provided', () => {
+    const username = 'nonExistentUser';
+    const password = 'overlook2021';
+    const result = handleLogin(username, password, users);
+    expect(result).to.equal('Invalid username');
   });
 });
