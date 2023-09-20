@@ -29,14 +29,22 @@ const createUniqueID = (bookings) => {
 }
 
 
-const bookRoom = (date, room, bookings) => {
-  let bookingInfo = {}
-  bookings.push()
+const bookRoom = (date, room, bookings, user) => {
+  let newBooking = {
+    "id": createUniqueID(bookings),
+    "userID": user['id'],
+    "date": date,
+    "roomNumber": room['number']
+  }
+
+  bookings.push(newBooking);
+  return bookings
 }
 
 
 export {
   checkAvailability,
   filterByRoomType,
-  createUniqueID
+  createUniqueID,
+  bookRoom
 }

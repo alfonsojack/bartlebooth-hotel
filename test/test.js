@@ -1,6 +1,6 @@
 import chai from 'chai';
 import { findBookings, calculateSpending } from '../src/user-functions';
-import { checkAvailability, filterByRoomType, createUniqueID } from '../src/booking-functions';
+import { checkAvailability, filterByRoomType, createUniqueID, bookRoom } from '../src/booking-functions';
 const expect = chai.expect;
 
 
@@ -162,5 +162,42 @@ describe('createUniqueID', () => {
     const uniqueID1 = createUniqueID(bookings);
     const uniqueID2 = createUniqueID(bookings);
     expect(uniqueID1).to.not.equal(uniqueID2);
+  });
+});
+
+describe('bookRoom', () => {
+  let bookings;
+  let user;
+  let room;
+
+  beforeEach(() => {
+    bookings = [
+      { id: 'abc123', userID: 'user1', date: '2023-10-01', roomNumber: '101' },
+      { id: 'def456', userID: 'user2', date: '2023-10-02', roomNumber: '102' },
+    ];
+
+    user = { id: 'user3' };
+    room = { number: '103' };
+  });
+
+  it('should book a room and add it to the bookings array', () => {
+    const initialLength = bookings.length;
+    const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
+
+    expect(updatedBookings).to.have.lengthOf(initialLength + 1);
+  });
+
+  it('should assign a unique ID to the booking', () => {
+    const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
+    const newBooking = updatedBookings.find(booking => booking.roomNumber === '103');
+
+    expect(newBooking).to.have.property('id').that.is.a('string').with.lengthOf(17);
+  });
+
+  it('should associate the booking with the user', () => {
+    const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
+    const newBooking = updatedBookings.find(booking => booking.roomNumber === '103');
+
+    expect(newBooking).to.have.property('userID').that.equals(user.id);
   });
 });
