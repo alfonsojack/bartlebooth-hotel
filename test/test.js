@@ -1,5 +1,6 @@
 import chai from 'chai';
 import { findBookings, calculateSpending } from '../src/user-functions';
+import { checkAvailability } from '../src/booking-functions';
 const expect = chai.expect;
 
 
@@ -65,5 +66,46 @@ describe('calculateSpending', () => {
     bookings[1].roomNumber = 104;
     const totalSpending = calculateSpending(user, bookings, rooms);
     expect(totalSpending).to.equal(0);
+  });
+});
+
+describe('checkAvailability', () => {
+  let bookings;
+  let rooms;
+  let date;
+
+  beforeEach(() => {
+    bookings = [
+      { id: 1, roomNumber: 101, date: '2023/09/20' },
+      { id: 2, roomNumber: 102, date: '2023/09/20' },
+      { id: 3, roomNumber: 103, date: '2023/09/21' },
+    ];
+    rooms = [
+      { number: 101, type: 'Standard' },
+      { number: 102, type: 'Deluxe' },
+      { number: 103, type: 'Suite' },
+      { number: 104, type: 'Standard' },
+    ];
+    date = '2023/09/20'; 
+  });
+
+  it('should return available rooms for the given date', () => {
+    const availableRooms = checkAvailability(bookings, rooms, date);
+    expect(availableRooms).to.deep.equal([
+      { number: 103, type: 'Suite' },
+      { number: 104, type: 'Standard' },
+    ]);
+  });
+
+  it('should return an empty array if no rooms are available for the given date', () => {
+    bookings = [
+      { id: 1, roomNumber: 101, date: '2023/09/20' },
+      { id: 2, roomNumber: 102, date: '2023/09/20' },
+      { id: 3, roomNumber: 103, date: '2023/09/20' },
+      { id: 4, roomNumber: 104, date: '2023/09/20' }
+    ];
+    date = '2023/09/20'; 
+    const availableRooms = checkAvailability(bookings, rooms, date);
+    expect(availableRooms).to.deep.equal([]);
   });
 });
