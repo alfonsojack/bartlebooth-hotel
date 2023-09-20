@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { findBookings, calculateSpending } from '../src/user-functions';
+import { findBookings, calculateSpending, removeCustomerPrefix } from '../src/user-functions';
 import { checkAvailability, filterByRoomType, createUniqueID, bookRoom } from '../src/booking-functions';
 const expect = chai.expect;
 
@@ -199,5 +199,24 @@ describe('bookRoom', () => {
     const newBooking = updatedBookings.find(booking => booking.roomNumber === '103');
 
     expect(newBooking).to.have.property('userID').that.equals(user.id);
+  });
+});
+
+describe('removeCustomerPrefix', () => {
+  let input;
+
+  beforeEach(() => {
+    input = 'customer50';
+  });
+
+  it('should remove the "customer" prefix from the input', () => {
+    const result = removeCustomerPrefix(input);
+    expect(result).to.equal('50');
+  });
+
+  it('should return the original input if "customer" is not present', () => {
+    input = 'user123'; 
+    const result = removeCustomerPrefix(input);
+    expect(result).to.equal('user123');
   });
 });

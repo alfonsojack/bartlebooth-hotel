@@ -21,8 +21,13 @@ const calculateSpending = (user, bookings, rooms) => {
   return totalBookingCost
 }
 
+const removeCustomerPrefix = (input) => {
+  const userID = input.replace('customer', '');
+  return userID;
+}
 
 export {
   findBookings,
-  calculateSpending
+  calculateSpending,
+  removeCustomerPrefix
 }
