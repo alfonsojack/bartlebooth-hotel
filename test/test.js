@@ -1,6 +1,6 @@
 import chai from 'chai';
 import { findBookings, calculateSpending } from '../src/user-functions';
-import { checkAvailability, filterByRoomType } from '../src/booking-functions';
+import { checkAvailability, filterByRoomType, createUniqueID } from '../src/booking-functions';
 const expect = chai.expect;
 
 
@@ -139,5 +139,28 @@ describe('filterByRoomType', () => {
   it('should return an empty array if no rooms match the specified type', () => {
     const filteredRooms = filterByRoomType(availableRooms, 'non-existent-type');
     expect(filteredRooms).to.deep.equal([]);
+  });
+});
+
+describe('createUniqueID', () => {
+  let bookings;
+
+  beforeEach(() => {
+
+    bookings = [
+      { id: 'abcdefghijabcdefgh' },
+      { id: '9876543210gfedcba' },
+    ];
+  });
+
+  it('should generate a unique ID', () => {
+    const uniqueID = createUniqueID(bookings);
+    expect(bookings.some(booking => booking.id === uniqueID)).to.be.false;
+  });
+
+  it('should generate a different unique ID each time', () => {
+    const uniqueID1 = createUniqueID(bookings);
+    const uniqueID2 = createUniqueID(bookings);
+    expect(uniqueID1).to.not.equal(uniqueID2);
   });
 });
