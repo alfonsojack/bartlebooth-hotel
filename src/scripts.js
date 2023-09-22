@@ -1,10 +1,10 @@
 import './css/styles.css';
 import { fetchData } from './api-calls'
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
-import { displayDashboard, displayLoginAttempt } from './dom-updates';
+import { displayDashboard, displayLoginAttempt, handleNavigation } from './dom-updates';
 
 const loginSubmit = document.getElementById("custom-submit")
-
+const navList = document.querySelectorAll('.nav-link');
 
 
 let customers;
@@ -40,3 +40,12 @@ loginSubmit.addEventListener("click", function(event) {
   loggedUser = handleLogin(username, password, customers);
   displayLoginAttempt(loggedUser, bookings, rooms);
 })
+
+navList.forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    const linkId = link.getAttribute("id");
+    console.log(linkId);
+    handleNavigation(linkId)
+  });
+});

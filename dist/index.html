@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=GFS+Didot&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=MuseoModerno:ital,wght@0,100;0,300;0,400;0,500;0,800;0,900;1,100;1,400;1,900&family=Poppins:wght@500&family=Rubik+Dirt&display=swap" rel="stylesheet">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Webpack Starter Kit</title>
@@ -29,11 +32,25 @@
     </form>
   </div>
   <div class="main-page hidden">
-    <h1>The Bartlebooth Hotel</h1>
-    <h2 id="greeting"></h2>
+    <div class="top">
+      <h1>The Bartlebooth Hotel</h1>
+      <div id="greeting"></div>
+      <div class="nav-style">
+      <nav>
+        <ul>
+          <li class="nav-link active" id="dashboard-nav"><a href=""><span></span>Dashboard</a></li>
+          <li class="nav-link" id="book-now-nav"><a href=""><span></span>Book Now</a></li>
+        </ul>
+      </nav>
+      </div>
+    </div>  
     <section class="dashboard">
+      <h2 id="bookings">Bookings</h2>
       <section id="my-bookings"></section>
       <article id="spending"><h3 class="article-head">Total Spending:</h3><p id="my-spending"></p></article>
+    </section>
+    <section class="book-now hidden">
+
     </section>
   </div>
   <div>

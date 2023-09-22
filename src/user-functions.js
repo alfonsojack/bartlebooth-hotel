@@ -2,8 +2,34 @@ const findBookings = (user, bookings) => {
   let userBookings = bookings.filter(booking => {
     return booking['userID'] === user['id']
   })
-  return userBookings
+  let sortedUserBookings = userBookings.sort((a,b) => a['date'].replaceAll('/', '') - b['date'].replaceAll('/', ''))
+  return sortedUserBookings
 }
+
+function formatDate(inputDate) {
+
+  const parts = inputDate.split('/');
+
+  if (parts.length === 3) {
+    const year = parseInt(parts[0]);
+    const month = parseInt(parts[1]);
+    const day = parseInt(parts[2]);
+
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const monthName = monthNames[month - 1];
+
+    const formattedDate = `${monthName} ${day}, ${year}`;
+    
+    return formattedDate;
+  } else {
+    return 'Invalid date format';
+  }
+}
+
 
 const calculateSpending = (user, bookings, rooms) => {
   let foundBookings = findBookings(user, bookings);
@@ -18,7 +44,8 @@ const calculateSpending = (user, bookings, rooms) => {
   let totalBookingCost = bookingCostList.reduce((spending, roomPrice) => {
     return spending + roomPrice
     }, 0);
-  return totalBookingCost.toFixed(2)
+  let number =  totalBookingCost.toFixed(2) * 1;
+  return number.toLocaleString()
 }
 
 const removeCustomerPrefix = (input) => {
@@ -46,5 +73,6 @@ export {
   calculateSpending,
   removeCustomerPrefix, 
   getUser,
-  handleLogin
+  handleLogin,
+  formatDate
 }
