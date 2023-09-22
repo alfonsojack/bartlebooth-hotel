@@ -1,11 +1,42 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
+import { fetchData } from './api-calls'
+import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
+import { displayDashboard, displayLoginAttempt } from './dom-updates';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+const loginSubmit = document.getElementById("custom-submit")
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+
+let customers;
+let bookings;
+let rooms;
+let loggedUser; 
+
+const setCustomer = (data) => {
+  customers = data;
+  return customers
+}
+
+const setBookings = (data) => {
+  bookings = data;
+  return bookings
+}
+
+const setRooms = (data) => {
+  rooms = data;
+  return rooms
+}
+
+window.addEventListener('load', function() {
+  fetchData('bookings', 'http://localhost:3001/api/v1/bookings', setBookings)
+  fetchData('rooms', 'http://localhost:3001/api/v1/rooms', setRooms)
+  fetchData('customers', 'http://localhost:3001/api/v1/customers', setCustomer)
+})
+
+loginSubmit.addEventListener("click", function(event) {
+  event.preventDefault();
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  loggedUser = handleLogin(username, password, customers);
+  displayLoginAttempt(loggedUser, bookings, rooms);
+})

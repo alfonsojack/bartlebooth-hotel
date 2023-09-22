@@ -18,7 +18,7 @@ const calculateSpending = (user, bookings, rooms) => {
   let totalBookingCost = bookingCostList.reduce((spending, roomPrice) => {
     return spending + roomPrice
     }, 0);
-  return totalBookingCost
+  return totalBookingCost.toFixed(2)
 }
 
 const removeCustomerPrefix = (input) => {
@@ -34,10 +34,8 @@ const getUser = (userID, users) => {
 const handleLogin = (username, password, users) => {
   let userID = removeCustomerPrefix(username);
   let loggedUser = getUser(userID, users); 
-  if (password !== 'overlook2021') {
-    return `Invalid password`
-  } else if (loggedUser == undefined) {
-    return `Invalid username`
+  if (password !== 'overlook2021' || loggedUser == undefined) {
+    return `Invalid username or password`
   } else {
     return loggedUser
   }

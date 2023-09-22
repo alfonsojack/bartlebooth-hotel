@@ -52,20 +52,20 @@ describe('calculateSpending', () => {
 
   it('should calculate the total spending for a user', () => {
     const totalSpending = calculateSpending(user, bookings, rooms);
-    expect(totalSpending).to.equal(250);
+    expect(totalSpending).to.equal(`250.00`);
   });
 
-  it('should return 0 if the user has no bookings', () => {
+  it('should return 0.00 if the user has no bookings', () => {
     user = { id: 2 };
     const totalSpending = calculateSpending(user, bookings, rooms);
-    expect(totalSpending).to.equal(0);
+    expect(totalSpending).to.equal(`0.00`);
   });
 
   it('should return 0 if there are no matching rooms for the bookings', () => {
     bookings[0].roomNumber = 103;
     bookings[1].roomNumber = 104;
     const totalSpending = calculateSpending(user, bookings, rooms);
-    expect(totalSpending).to.equal(0);
+    expect(totalSpending).to.equal(`0.00`);
   });
 });
 
@@ -263,17 +263,17 @@ describe('handleLogin', () => {
     expect(result).to.deep.equal({ id: 1, name: 'Alice' });
   });
 
-  it('should return "Invalid password" when an invalid password is provided', () => {
+  it('should return "Invalid username or password" when an invalid password is provided', () => {
     const username = 'customer2';
     const password = 'incorrectPassword';
     const result = handleLogin(username, password, users);
-    expect(result).to.equal('Invalid password');
+    expect(result).to.equal('Invalid username or password');
   });
 
-  it('should return "Invalid username" when an invalid username is provided', () => {
+  it('should return "Invalid username or password" when an invalid username is provided', () => {
     const username = 'nonExistentUser';
     const password = 'overlook2021';
     const result = handleLogin(username, password, users);
-    expect(result).to.equal('Invalid username');
+    expect(result).to.equal('Invalid username or password');
   });
 });
