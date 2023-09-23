@@ -50,19 +50,34 @@
       <article id="spending"><h3 class="article-head">Total Spending:</h3><p id="my-spending"></p></article>
     </section>
     <section class="book-now hidden">
-    <div class="calendar-form">
-      <form>  
+    <div class="calendar-form hidden">
+      <form id="calendar-box">  
         <input class="calendar" type="date"/>
+        <p class="calendar-error hidden">Please select a date</p>
         <a href="#" id="submit-button">
           <span></span>
           <span></span>
           <span></span>
           <span></span>
-          Submit
+          Check Availability
         </a>
       </form>
     </div>
+    <div class="availability-display">
+      <div class="filter-style">
+        <nav>
+          <ul>
+            <li class="filter-link active" id="all"><a href=""><span></span>All</a></li>
+            <li class="filter-link" id="suite"><a href=""><span></span>Suite</a></li>
+            <li class="filter-link" id="residential-suite"><a href=""><span></span>Residential Suite</a></li>
+            <li class="filter-link" id="junior-suite"><a href=""><span></span>Junior Suite</a></li>
+            <li class="filter-link" id="single-room"><a href=""><span></span>Single Room</a></li>
+          </ul>
+        </nav>
+      </div>
+    <section id="available-bookings"></section>
     </section>
+  </div>
   </div>
   <div>
 

@@ -1,3 +1,5 @@
+import { updateBookings } from "./api-calls";
+
 const checkAvailability = (bookings, rooms, date) => {
   let filledBookings = bookings.filter(booking => booking['date'] === date);
   let filledRooms = filledBookings.map(booking => {
@@ -11,6 +13,11 @@ const checkAvailability = (bookings, rooms, date) => {
 const filterByRoomType = (availableRooms, type) => {
   let filteredRooms =  availableRooms.filter(room => {return room['roomType'] == type.replaceAll('-', ' ')})
   return filteredRooms
+}
+
+const reformatDate = (date) => {
+  let reformattedDate = date.replaceAll('-', '/')
+  return reformattedDate
 }
 
 const createUniqueID = (bookings) => {
@@ -31,12 +38,11 @@ const createUniqueID = (bookings) => {
 
 const bookRoom = (date, room, bookings, user) => {
   let newBooking = {
-    "id": createUniqueID(bookings),
     "userID": user['id'],
     "date": date,
-    "roomNumber": room['number']
+    "roomNumber": room * 1
   }
-
+  updateBookings(newBooking)
   bookings.push(newBooking);
   return bookings
 }
@@ -46,5 +52,6 @@ export {
   checkAvailability,
   filterByRoomType,
   createUniqueID,
-  bookRoom
+  bookRoom,
+  reformatDate
 }

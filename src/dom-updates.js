@@ -10,7 +10,12 @@ const dashboardNav = document.querySelector('#dashboard-nav')
 const booknowNav = document.querySelector('#book-now-nav')
 const dashboard = document.querySelector('.dashboard')
 const bookNow = document.querySelector('.book-now')
-const nav = document.querySelector('nav')
+const calendarForm = document.querySelector('.calendar-form')
+const availableBookings = document.querySelector('#available-bookings')
+const availabilityDisplay = document.querySelector('.availability-display')
+const filterList = document.querySelectorAll('.filter-link');
+const calendarError = document.querySelector('.calendar-error')
+
 
 const handleNavigation = (linkId) => {
   if (linkId == 'book-now-nav'){
@@ -18,11 +23,15 @@ const handleNavigation = (linkId) => {
     bookNow.classList.toggle('hidden', false)
     booknowNav.classList.toggle('active', true)
     dashboardNav.classList.toggle('active', false)
+    calendarForm.classList.toggle('hidden', false)
+    availabilityDisplay.classList.toggle('hidden', true)
   } else if (linkId == 'dashboard-nav') {
     dashboard.classList.toggle('hidden', false)
     bookNow.classList.toggle('hidden', true)
     booknowNav.classList.toggle('active', false)
     dashboardNav.classList.toggle('active', true)
+    calendarForm.classList.toggle('hidden', true)
+    availabilityDisplay.classList.toggle('hidden', true)
   }
 }
 
@@ -48,8 +57,31 @@ const displayDashboard = (userBookings, userSpending) => {
     )
 }
 
+const displayAvailability = (availableRooms) => {
+  calendarError.classList.toggle('hidden', true)
+  availabilityDisplay.classList.toggle('hidden', false)
+  availableBookings.innerHTML = ''
+  availableRooms.forEach(room => 
+    availableBookings.innerHTML += `<article class="bookings-card" id="available-card"><li>Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li>Price: $${room['costPerNight'].toFixed(2)} per night</li><button class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
+}
+
+const handleFilterNav = (linkId) => {
+  filterList.forEach((link) => {
+    link.classList.toggle('active', false)
+  })
+  const activeFilter = document.querySelector(`#${linkId}`);
+  activeFilter.classList.toggle('active', true)
+}
+
+const displayCalendarError = () => {
+  calendarError.classList.toggle('hidden', false)
+}
+
 export {
   displayLoginAttempt,
   displayDashboard,
-  handleNavigation
+  handleNavigation,
+  displayAvailability,
+  handleFilterNav,
+  displayCalendarError
 }

@@ -1,19 +1,22 @@
 import './css/styles.css';
 import { fetchData } from './api-calls'
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
-import { displayDashboard, displayLoginAttempt, handleNavigation } from './dom-updates';
+import { checkAvailability, filterByRoomType, createUniqueID, bookRoom, reformatDate } from './booking-functions';
+import { displayDashboard, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
 
 
 
 const loginSubmit = document.getElementById("custom-submit")
 const navList = document.querySelectorAll('.nav-link');
 const submitButton = document.getElementById('submit-button');
-
+const filterList = document.querySelectorAll('.filter-link');
 
 let customers;
 let bookings;
 let rooms;
 let loggedUser; 
+let selectedDate;
+let availableRooms
 
 const setCustomer = (data) => {
   customers = data;
@@ -53,15 +56,69 @@ navList.forEach((link) => {
   });
 });
 
-
-  // Add a click event listener to the submit button
-  submitButton.addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent the form from submitting
-
-    // Get the value of the date input field
-    const dateInput = document.querySelector('.calendar');
-    const inputValue = dateInput.value;
-
-    // Log the input value to the console
-    console.log('Input Value:', inputValue);
+filterList.forEach((link) => {
+  link.addEventListener("click", function (event) {
+    event.preventDefault();
+    const linkId = link.getAttribute("id");
+    console.log(linkId);
+    handleFilterNav(linkId);
+    if (linkId == 'all') {
+      displayAvailability(availableRooms)
+      const bookNowBtn = document.querySelectorAll('.book-now-btn')
+      bookNowBtn.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          const roomId = link.getAttribute("id")
+          bookRoom(selectedDate, roomId, bookings, loggedUser)
+          handleNavigation('dashboard-nav')
+          displayLoginAttempt(loggedUser, bookings, rooms);    
+        }
+        )
+      }
+      )
+    } else {
+      let filteredRooms = filterByRoomType(availableRooms, linkId);
+      displayAvailability(filteredRooms)
+      const bookNowBtn = document.querySelectorAll('.book-now-btn')
+      bookNowBtn.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          const roomId = link.getAttribute("id")
+          bookRoom(selectedDate, roomId, bookings, loggedUser);
+          handleNavigation('dashboard-nav')
+          displayLoginAttempt(loggedUser, bookings, rooms);    
+        }
+        )
+      }
+      )
+    
+    }
   });
+});
+
+submitButton.addEventListener('click', function (event) {
+  event.preventDefault();
+  const dateInput = document.querySelector('.calendar');
+  const inputValue = dateInput.value;
+  selectedDate = reformatDate(inputValue);
+  console.log(selectedDate)
+  if (selectedDate == ''){
+    displayCalendarError()
+  } else {
+    availableRooms = checkAvailability(bookings, rooms, selectedDate);
+    displayAvailability(availableRooms)
+    const bookNowBtn = document.querySelectorAll('.book-now-btn')
+      bookNowBtn.forEach((link) => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault();
+          const roomId = link.getAttribute("id")
+          console.log(roomId)
+          bookRoom(selectedDate, roomId, bookings, loggedUser);
+          handleNavigation('dashboard-nav')
+          displayLoginAttempt(loggedUser, bookings, rooms);    
+        }
+        )
+      }
+      )
+  }
+});
