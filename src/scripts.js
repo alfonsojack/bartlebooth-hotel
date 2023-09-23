@@ -3,8 +3,11 @@ import { fetchData } from './api-calls'
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
 import { displayDashboard, displayLoginAttempt, handleNavigation } from './dom-updates';
 
+
+
 const loginSubmit = document.getElementById("custom-submit")
 const navList = document.querySelectorAll('.nav-link');
+const submitButton = document.getElementById('submit-button');
 
 
 let customers;
@@ -49,3 +52,16 @@ navList.forEach((link) => {
     handleNavigation(linkId)
   });
 });
+
+
+  // Add a click event listener to the submit button
+  submitButton.addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Get the value of the date input field
+    const dateInput = document.querySelector('.calendar');
+    const inputValue = dateInput.value;
+
+    // Log the input value to the console
+    console.log('Input Value:', inputValue);
+  });

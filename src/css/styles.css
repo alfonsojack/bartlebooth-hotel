@@ -7,7 +7,20 @@ body {
   padding:0;
   font-family: sans-serif;
   background: #A3D9FF;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
+ 
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
 
 .hidden {
   display: none;
@@ -35,6 +48,8 @@ nav {
   animation: btn-anim3 1s linear infinite;
   animation-delay: .5s
 } */
+
+
 
 .active a span {
   bottom: 0;
@@ -281,6 +296,7 @@ article {
   font-size: 12px;
 }
 
+
 .login-box form a {
   position: relative;
   display: inline-block;
@@ -385,4 +401,156 @@ article {
   50%,100% {
     bottom: 100%;
   }
+}
+
+.book-now {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; /* Set a height to center vertically */
+}
+
+/* Style the form elements (optional) */
+.calendar {
+  margin: 10px;
+  border-radius: 10px;
+  width: 250px;
+  height: 10px;
+  text-align: center;
+  /* align-items: center; */
+  align-content: center;
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+
+/* Style the submit button (optional) */
+#submit-button {
+  padding: 10px 20px;
+  color: #96E6B3;
+  border: none;
+  cursor: pointer;
+}
+
+#submit-button:hover {
+  color: white
+}
+
+.calendar-form a:hover {
+  background: #96E6B3;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #96E6B3,
+              0 0 25px #96E6B3,
+              0 0 50px #96E6B3,
+              0 0 100px #96E6B3;
+}
+
+.calendar-form a span {
+  position: absolute;
+  display: block;
+}
+
+
+.calendar-form a span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #96E6B3);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+
+
+.calendar-form a span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #96E6B3);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.calendar-form a span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #96E6B3);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.calendar-form a span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #96E6B3);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+.calendar-form form{
+  background-color: #042A2B;
+  height: 250px;
+  width: 500px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+
+.calendar-form form a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #96E6B3;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
 }
