@@ -3,13 +3,14 @@ import { fetchData } from './api-calls'
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
 import { checkAvailability, filterByRoomType, createUniqueID, bookRoom, reformatDate } from './booking-functions';
 import { displayDashboard, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
-
+import dayjs from 'dayjs';
 
 
 const loginSubmit = document.getElementById("custom-submit")
 const navList = document.querySelectorAll('.nav-link');
 const submitButton = document.getElementById('submit-button');
 const filterList = document.querySelectorAll('.filter-link');
+const calendar = document.querySelector('.calendar')
 
 let customers;
 let bookings;
@@ -34,6 +35,7 @@ const setRooms = (data) => {
 }
 
 window.addEventListener('load', function() {
+  calendar.min = dayjs().format('YYYY-MM-DD');
   fetchData('bookings', 'http://localhost:3001/api/v1/bookings', setBookings)
   fetchData('rooms', 'http://localhost:3001/api/v1/rooms', setRooms)
   fetchData('customers', 'http://localhost:3001/api/v1/customers', setCustomer)
