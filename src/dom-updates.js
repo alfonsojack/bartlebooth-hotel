@@ -17,6 +17,7 @@ const filterList = document.querySelectorAll('.filter-link');
 const calendarError = document.querySelector('.calendar-error')
 const filterBar = document.querySelector('.filter-style')
 const bookingsDisplay = document.querySelector('#bookings-display')
+const filterAll = document.querySelector('#all')
 
 const handleNavigation = (linkId) => {
   if (linkId == 'book-now-nav'){
@@ -62,6 +63,10 @@ const displayDashboard = (userBookings, userSpending) => {
 }
 
 const displayAvailability = (availableRooms) => {
+  filterList.forEach((link) => {
+    link.classList.toggle('active', false)
+  })
+  filterAll.classList.toggle('active', true)
   calendarForm.style.paddingTop = '300px'
   calendarError.classList.toggle('hidden', true)
   availabilityDisplay.classList.toggle('hidden', false)
