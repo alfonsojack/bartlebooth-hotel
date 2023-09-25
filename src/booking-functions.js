@@ -1,5 +1,3 @@
-import { updateBookings } from "./api-calls";
-
 const checkAvailability = (bookings, rooms, date) => {
   let filledBookings = bookings.filter(booking => booking['date'] === date);
   let filledRooms = filledBookings.map(booking => {
@@ -42,9 +40,9 @@ const bookRoom = (date, room, bookings, user) => {
     "date": date,
     "roomNumber": room * 1
   }
-  updateBookings(newBooking)
+  console.log(newBooking)
   bookings.push(newBooking);
-  return bookings
+  return newBooking
 }
 
 

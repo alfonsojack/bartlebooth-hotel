@@ -1,8 +1,8 @@
 import './css/styles.css';
-import { fetchData } from './api-calls'
-import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
-import { checkAvailability, filterByRoomType, createUniqueID, bookRoom, reformatDate } from './booking-functions';
-import { resetFilterBar, displayDashboard, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
+import { fetchData, updateBookings } from './api-calls'
+import { handleLogin } from './user-functions'
+import { checkAvailability, filterByRoomType, bookRoom, reformatDate } from './booking-functions';
+import { resetFilterBar, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
 import dayjs from 'dayjs';
 
 
@@ -53,7 +53,6 @@ navList.forEach((link) => {
   link.addEventListener("click", function (event) {
     event.preventDefault();
     const linkId = link.getAttribute("id");
-    console.log(linkId);
     handleNavigation(linkId)
   });
 });
@@ -62,7 +61,6 @@ filterList.forEach((link) => {
   link.addEventListener("click", function (event) {
     event.preventDefault();
     const linkId = link.getAttribute("id");
-    console.log(linkId);
     handleFilterNav(linkId);
     if (linkId == 'all') {
       displayAvailability(availableRooms)
@@ -71,7 +69,8 @@ filterList.forEach((link) => {
         link.addEventListener("click", function (event) {
           event.preventDefault();
           const roomId = link.getAttribute("id")
-          bookRoom(selectedDate, roomId, bookings, loggedUser)
+          let newBooking = bookRoom(selectedDate, roomId, bookings, loggedUser);
+          updateBookings(newBooking)
           handleNavigation('dashboard-nav')
           displayLoginAttempt(loggedUser, bookings, rooms);    
         }
@@ -86,7 +85,8 @@ filterList.forEach((link) => {
         link.addEventListener("click", function (event) {
           event.preventDefault();
           const roomId = link.getAttribute("id")
-          bookRoom(selectedDate, roomId, bookings, loggedUser);
+          let newBooking = bookRoom(selectedDate, roomId, bookings, loggedUser);
+          updateBookings(newBooking)
           handleNavigation('dashboard-nav')
           displayLoginAttempt(loggedUser, bookings, rooms);    
         }
@@ -103,7 +103,6 @@ submitButton.addEventListener('click', function (event) {
   const dateInput = document.querySelector('.calendar');
   const inputValue = dateInput.value;
   selectedDate = reformatDate(inputValue);
-  console.log(selectedDate)
   if (selectedDate == ''){
     displayCalendarError()
   } else {
@@ -115,8 +114,8 @@ submitButton.addEventListener('click', function (event) {
         link.addEventListener("click", function (event) {
           event.preventDefault();
           const roomId = link.getAttribute("id")
-          console.log(roomId)
-          bookRoom(selectedDate, roomId, bookings, loggedUser);
+          let newBooking = bookRoom(selectedDate, roomId, bookings, loggedUser);
+          updateBookings(newBooking)
           handleNavigation('dashboard-nav')
           displayLoginAttempt(loggedUser, bookings, rooms);    
         }

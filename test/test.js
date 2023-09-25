@@ -1,6 +1,6 @@
 import chai from 'chai';
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin, formatDate } from '../src/user-functions';
-import { checkAvailability, filterByRoomType, createUniqueID, bookRoom } from '../src/booking-functions';
+import { checkAvailability, filterByRoomType, createUniqueID, bookRoom, reformatDate } from '../src/booking-functions';
 const expect = chai.expect;
 
 
@@ -165,42 +165,34 @@ describe('createUniqueID', () => {
   });
 });
 
-// describe('bookRoom', () => {
-//   let bookings;
-//   let user;
-//   let room;
+describe('bookRoom function', () => {
+  let bookings;
+  let user;
 
-//   beforeEach(() => {
-//     bookings = [
-//       { id: 'abc123', userID: 'user1', date: '2023-10-01', roomNumber: '101' },
-//       { id: 'def456', userID: 'user2', date: '2023-10-02', roomNumber: '102' },
-//     ];
+  beforeEach(() => {
+    bookings = [];
+    user = { id: '1' };
+  });
 
-//     user = { id: 'user3' };
-//     room = { number: '103' };
-//   });
+  it('should add a new booking to the bookings array', () => {
+    const date = '2023/09/25';
+    const room = 101;
 
-//   it('should book a room and add it to the bookings array', () => {
-//     const initialLength = bookings.length;
-//     const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
+    const newBooking = bookRoom(date, room, bookings, user);
 
-//     expect(updatedBookings).to.have.lengthOf(initialLength + 1);
-//   });
+    expect(bookings.length).to.equal(1);
+    expect(bookings[0]).to.equal(newBooking);
+  });
 
-//   it('should assign a unique ID to the booking', () => {
-//     const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
-//     const newBooking = updatedBookings.find(booking => booking.roomNumber === '103');
+  it('should return the newly booked room', () => {
+    const date = '2023/09/25';
+    const room = 102;
 
-//     expect(newBooking).to.have.property('id').that.is.a('string').with.lengthOf(17);
-//   });
+    const newBooking = bookRoom(date, room, bookings, user);
 
-//   it('should associate the booking with the user', () => {
-//     const updatedBookings = bookRoom('2023-10-03', room, bookings, user);
-//     const newBooking = updatedBookings.find(booking => booking.roomNumber === '103');
-
-//     expect(newBooking).to.have.property('userID').that.equals(user.id);
-//   });
-// });
+    expect(newBooking['userID']).to.equal(user['id']);
+  });
+});
 
 describe('removeCustomerPrefix', () => {
   let input;
@@ -278,6 +270,7 @@ describe('handleLogin', () => {
   });
 });
 
+
 describe('formatDate function', () => {
   let inputDate;
 
@@ -294,5 +287,34 @@ describe('formatDate function', () => {
     inputDate = 'invalidDate';
     const result = formatDate(inputDate);
     expect(result).to.equal('Invalid date format');
+  });
+});
+
+describe('reformatDate function', () => {
+  it('should replace hyphens with forward slashes in a date string', () => {
+    const inputDate = '2023-09-23';
+    const expectedOutput = '2023/09/23';
+
+    const result = reformatDate(inputDate);
+
+    expect(result).to.equal(expectedOutput);
+  });
+
+  it('should not change the date string if it contains no hyphens', () => {
+    const inputDate = '2023/09/23'; 
+    const expectedOutput = '2023/09/23';
+
+    const result = reformatDate(inputDate);
+
+    expect(result).to.equal(expectedOutput);
+  });
+
+  it('should handle multiple hyphens in the date string', () => {
+    const inputDate = '2023-09-23-12-30';
+    const expectedOutput = '2023/09/23/12/30';
+
+    const result = reformatDate(inputDate);
+
+    expect(result).to.equal(expectedOutput);
   });
 });

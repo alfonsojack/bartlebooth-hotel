@@ -1,3 +1,5 @@
+import { printError } from "./dom-updates";
+
 const fetchData = (type, link, fn) => {
   return fetch(link)
     .then(response => response.json())
@@ -6,6 +8,7 @@ const fetchData = (type, link, fn) => {
     })
     .catch(error => {
        console.error(`An error occurred: ${error}`);
+       printError(error, type)
     })
 };
 

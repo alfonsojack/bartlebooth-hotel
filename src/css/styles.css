@@ -11,6 +11,10 @@ body {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
+
+.main-page, #available-bookings, .filter-style, .dashboard, .book-now, .calendar-form, #bookings-display {
+  animation: fadeInAnimation ease 1s;
+} 
  
 @keyframes fadeInAnimation {
     0% {

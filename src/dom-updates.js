@@ -40,6 +40,11 @@ const handleNavigation = (linkId) => {
   }
 }
 
+const printError = (error, type) => {
+  loginError.classList.toggle('hidden', false);
+  loginError.innerText = `Error loading ${type}: ${error}`
+};
+
 const displayLoginAttempt = (loggedUser, bookings, rooms) => {
   if (loggedUser === 'Invalid username or password') {
     loginError.classList.toggle('hidden', false);
@@ -48,7 +53,7 @@ const displayLoginAttempt = (loggedUser, bookings, rooms) => {
     loginError.classList.toggle('hidden', true);
     loginBox.classList.toggle('hidden', true);
     mainPage.classList.toggle('hidden', false);
-    greeting.innerHTML = `<h2 id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>.</h2>`
+    greeting.innerHTML = `<h2 tabindex="0" id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>.</h2>`
     let userBookings = findBookings(loggedUser, bookings);
     let userSpending = calculateSpending(loggedUser, bookings, rooms);
     displayDashboard(userBookings, userSpending)
@@ -58,7 +63,7 @@ const displayLoginAttempt = (loggedUser, bookings, rooms) => {
 const displayDashboard = (userBookings, userSpending) => {
   mySpendingTitle.innerText = `$${userSpending}`;
   userBookings.forEach(booking => 
-    myBookings.innerHTML += `<article class="bookings-card"><p>${formatDate(booking['date'])}<p><p>Room ${booking['roomNumber']}</p></article>`
+    myBookings.innerHTML += `<article tabindex="0" class="bookings-card"><p tabindex="0">${formatDate(booking['date'])}</p><p tabindex="0">Room ${booking['roomNumber']}</p></article>`
     )
 }
 const resetFilterBar = () => {
@@ -74,7 +79,7 @@ const displayAvailability = (availableRooms) => {
   availabilityDisplay.classList.toggle('hidden', false)
   availableBookings.innerHTML = ''
   availableRooms.forEach(room => 
-    availableBookings.innerHTML += `<article class="bookings-card" id="available-card"><menu><li>Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li>Price: $${room['costPerNight'].toFixed(2)} per night</li></menu><button class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
+    availableBookings.innerHTML += `<article class="bookings-card" id="available-card" tabindex="0"><menu><li tabindex="0">Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li tabindex="0">Price: $${room['costPerNight'].toFixed(2)} per night</li></menu><button tabindex="0" class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
 }
 
 const handleFilterNav = (linkId) => {
@@ -96,5 +101,6 @@ export {
   displayAvailability,
   handleFilterNav,
   displayCalendarError,
-  resetFilterBar
+  resetFilterBar,
+  printError
 }
