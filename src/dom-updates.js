@@ -20,6 +20,7 @@ const bookingsDisplay = document.querySelector('#bookings-display')
 
 const handleNavigation = (linkId) => {
   if (linkId == 'book-now-nav'){
+    calendarForm.style.paddingTop = '0px'
     bookingsDisplay.classList.toggle('hidden', true)
     bookNow.classList.toggle('hidden', false)
     booknowNav.classList.toggle('active', true)
@@ -61,6 +62,7 @@ const displayDashboard = (userBookings, userSpending) => {
 }
 
 const displayAvailability = (availableRooms) => {
+  calendarForm.style.paddingTop = '300px'
   calendarError.classList.toggle('hidden', true)
   availabilityDisplay.classList.toggle('hidden', false)
   availableBookings.innerHTML = ''
