@@ -47,15 +47,6 @@ nav {
   margin: auto
 }
 
-/* nav .line {
-  height: 2px;
-  position: absolute;
-  bottom: 0;
-  margin: 10px 0 0 0;
-  background: linear-gradient(270deg, transparent, #96E6B3);
-  animation: btn-anim3 1s linear infinite;
-  animation-delay: .5s
-} */
 
 
 
@@ -158,6 +149,7 @@ nav ul li a {
 h1 {
   text-align: center;
   color: white;
+  font-size:  50px
 }
 
 #greeting {
@@ -165,16 +157,16 @@ h1 {
   margin: auto;
   text-align: center;
   font-style: italic;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
+  overflow: hidden; 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: .15em; 
   animation: 
     typing 6s steps(40, end),
     blink-caret 1s step-end;
 }
 
-/* The typing effect */
+
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
@@ -186,16 +178,17 @@ h1 {
   padding-bottom: 20px;
   background-color: #042A2B;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  margin-bottom: 50px;
 }
 
 #bookings {
   margin: auto;
   margin-top: 50px;
-  width: fit-content;
-  padding: 10px;
+  width: 1000px;
+  padding: 20px;
   color: white;
   background-color: #042A2B;
-  /* border-radius: 10px; */
+  text-align: center;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
 }
 
@@ -209,29 +202,35 @@ span.name {
 }
 
 article {
-  /* border-radius: 10px; */
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
-  margin: 10px;
-  padding: 5px;
-  width: 250px;
-  height: 100px;
+  margin: 20px;
+  padding: 10px;
   background-color: #042A2B;
   color: white;
+  width: 800px;
+  font-size: 20px;
+  align-items: center;
 }
 
 #spending {
+  padding: 20px;
   margin: auto;
   text-align: center;
+  height: 150px;
+  width: 1000px;
+  color: #96E6B3
 }
 
 #my-bookings {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: start;
-  margin-top: 50px;
-  margin-bottom: 90px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  text-align: center;
+  padding-bottom: 90px;
+  max-height: 1000px;
+  overflow-y: auto;
+  background-color: #042A2B;
 }
 
 #available-bookings {
@@ -240,10 +239,19 @@ article {
   align-items: flex-start;
   justify-content: center;
   text-align: start;
-  max-height: 300px; 
+  height: 400px; 
   overflow-y: auto;
+  width: 1500px;
+  background-color: #042A2B;
+  padding-bottom: 90px;
+  margin-bottom: 50px;
 }
 
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .login-error, .calendar-error {
   width: 90%;
@@ -256,8 +264,12 @@ article {
   font-style: italic;
 }
 
-#bookings-card {
-  padding: 10px
+.bookings-card {
+  padding: 10px;
+  background-color: #042A2B;
+  border: 5px #96E6B3 solid;
+  width: 800px;
+  height: 600px;
 }
 
 .login-box {
@@ -426,37 +438,35 @@ article {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh; /* Set a height to center vertically */
+  margin-top: 50px;
+  height: 50vh; 
 }
 
-/* Style the form elements (optional) */
+
 .calendar {
   margin: 10px;
   border-radius: 10px;
   width: 250px;
   height: 10px;
   text-align: center;
-  /* align-items: center; */
   align-content: center;
   padding: 20px;
   font-size: 20px;
   margin-top: 50px;
 }
 
-
-/* Style the submit button (optional) */
-#submit-button {
+#submit-button, button {
   padding: 10px 20px;
   color: #96E6B3;
   border: none;
   cursor: pointer;
 }
 
-#submit-button:hover {
+#submit-button:hover, button:hover {
   color: white
 }
 
-.calendar-form a:hover {
+.calendar-form a:hover, button:hover {
   background: #96E6B3;
   color: #fff;
   border-radius: 5px;
@@ -473,7 +483,6 @@ article {
 
 .calendar-form {
   padding: 50px;
-  padding-top: 300px;
 }
 
 .calendar-form a span:nth-child(1) {
@@ -578,13 +587,24 @@ article {
 }
 
 #available-card {
-  background-color: #48233C;
-  width: 400px;
+
+  width: 500px;
   padding: 20px;
-  height: 120px;
-  margin: 20px
+  height: 150px;
+  margin: 20px;
+  font-size: 25px;
 }
 
 #calendar-box {
+  padding: 10px
+}
+
+button {
+  margin: auto;
+  height: 40px;
+  width: 500px;
+  margin-top: 20px;
+  background-color: #042A2B;
+  font-size: 20px;
   padding: 10px
 }
