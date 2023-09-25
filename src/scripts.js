@@ -2,7 +2,7 @@ import './css/styles.css';
 import { fetchData } from './api-calls'
 import { findBookings, calculateSpending, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
 import { checkAvailability, filterByRoomType, createUniqueID, bookRoom, reformatDate } from './booking-functions';
-import { displayDashboard, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
+import { resetFilterBar, displayDashboard, displayLoginAttempt, handleNavigation, displayAvailability, handleFilterNav, displayCalendarError } from './dom-updates';
 import dayjs from 'dayjs';
 
 
@@ -107,6 +107,7 @@ submitButton.addEventListener('click', function (event) {
   if (selectedDate == ''){
     displayCalendarError()
   } else {
+    resetFilterBar();
     availableRooms = checkAvailability(bookings, rooms, selectedDate);
     displayAvailability(availableRooms)
     const bookNowBtn = document.querySelectorAll('.book-now-btn')

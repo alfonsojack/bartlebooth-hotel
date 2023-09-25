@@ -61,18 +61,20 @@ const displayDashboard = (userBookings, userSpending) => {
     myBookings.innerHTML += `<article class="bookings-card"><p>${formatDate(booking['date'])}<p><p>Room ${booking['roomNumber']}</p></article>`
     )
 }
-
-const displayAvailability = (availableRooms) => {
+const resetFilterBar = () => {
   filterList.forEach((link) => {
     link.classList.toggle('active', false)
   })
   filterAll.classList.toggle('active', true)
+}
+
+const displayAvailability = (availableRooms) => {
   calendarForm.style.paddingTop = '300px'
   calendarError.classList.toggle('hidden', true)
   availabilityDisplay.classList.toggle('hidden', false)
   availableBookings.innerHTML = ''
   availableRooms.forEach(room => 
-    availableBookings.innerHTML += `<article class="bookings-card" id="available-card"><li>Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li>Price: $${room['costPerNight'].toFixed(2)} per night</li><button class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
+    availableBookings.innerHTML += `<article class="bookings-card" id="available-card"><menu><li>Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li>Price: $${room['costPerNight'].toFixed(2)} per night</li></menu><button class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
 }
 
 const handleFilterNav = (linkId) => {
@@ -93,5 +95,6 @@ export {
   handleNavigation,
   displayAvailability,
   handleFilterNav,
-  displayCalendarError
+  displayCalendarError,
+  resetFilterBar
 }

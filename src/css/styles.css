@@ -120,7 +120,7 @@ nav ul {
 
 nav ul li {
   margin: 0 40px 0 0;
-  opacity: 0.4;
+  opacity: 1;
   transition: all 0.4s ease;
 }
 
@@ -128,8 +128,8 @@ nav ul li:hover {
   opacity: 0.7
 }
 
-nav ul li.active {
-  opacity: 1;
+nav ul li.active a {
+  color: #96E6B3
 }
 
 nav ul li:last-child {
@@ -190,6 +190,7 @@ h1 {
   background-color: #042A2B;
   text-align: center;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  letter-spacing: 0.2em;
 }
 
 span.name {
@@ -316,6 +317,14 @@ article {
   color: #fff;
   pointer-events: none;
   transition: .5s;
+}
+
+#cal-label {
+  font-size: 20px;
+  color: #fff;
+  padding-top: 20px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
 }
 
 .login-box .user-box input:focus ~ label,
@@ -452,7 +461,7 @@ article {
   align-content: center;
   padding: 20px;
   font-size: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 #submit-button, button {
@@ -607,4 +616,8 @@ button {
   background-color: #042A2B;
   font-size: 20px;
   padding: 10px
+}
+
+menu {
+  margin: 0
 }
