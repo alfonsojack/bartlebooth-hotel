@@ -44,10 +44,12 @@
       </nav>
       </div>
     </div>  
-    <section class="dashboard">
+    <section class="dashboard hidden">
+      <div id="bookings-display">
       <h2 id="bookings">Bookings</h2>
       <section id="my-bookings"></section>
       <article id="spending"><h3 class="article-head">Total Spending:</h3><p id="my-spending"></p></article>
+    </div>
     </section>
     <section class="book-now hidden">
     <div class="calendar-form hidden">
@@ -55,16 +57,12 @@
         <input class="calendar" type="date"/>
         <p class="calendar-error hidden">Please select a date</p>
         <a href="#" id="submit-button">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
           Check Availability
         </a>
       </form>
     </div>
-    <div class="availability-display">
-      <div class="filter-style">
+    <div class="availability-display hidden">
+      <div class="filter-style hidden">
         <nav>
           <ul>
             <li class="filter-link active" id="all"><a href=""><span></span>All</a></li>

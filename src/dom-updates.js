@@ -15,23 +15,26 @@ const availableBookings = document.querySelector('#available-bookings')
 const availabilityDisplay = document.querySelector('.availability-display')
 const filterList = document.querySelectorAll('.filter-link');
 const calendarError = document.querySelector('.calendar-error')
-
+const filterBar = document.querySelector('.filter-style')
+const bookingsDisplay = document.querySelector('#bookings-display')
 
 const handleNavigation = (linkId) => {
   if (linkId == 'book-now-nav'){
-    dashboard.classList.toggle('hidden', true)
+    bookingsDisplay.classList.toggle('hidden', true)
     bookNow.classList.toggle('hidden', false)
     booknowNav.classList.toggle('active', true)
     dashboardNav.classList.toggle('active', false)
     calendarForm.classList.toggle('hidden', false)
     availabilityDisplay.classList.toggle('hidden', true)
+    filterBar.classList.toggle('hidden', false)
   } else if (linkId == 'dashboard-nav') {
-    dashboard.classList.toggle('hidden', false)
+    bookingsDisplay.classList.toggle('hidden', false)
     bookNow.classList.toggle('hidden', true)
     booknowNav.classList.toggle('active', false)
     dashboardNav.classList.toggle('active', true)
     calendarForm.classList.toggle('hidden', true)
     availabilityDisplay.classList.toggle('hidden', true)
+    filterBar.classList.toggle('hidden', true)
   }
 }
 
@@ -53,7 +56,7 @@ const displayLoginAttempt = (loggedUser, bookings, rooms) => {
 const displayDashboard = (userBookings, userSpending) => {
   mySpendingTitle.innerText = `$${userSpending}`;
   userBookings.forEach(booking => 
-    myBookings.innerHTML += `<article class="bookings-card"><li>Date: ${formatDate(booking['date'])}</li><li>Room Number: ${booking['roomNumber']}</li></article>`
+    myBookings.innerHTML += `<article class="bookings-card"><p>${formatDate(booking['date'])}<p><p>Room ${booking['roomNumber']}</p></article>`
     )
 }
 
