@@ -18,20 +18,6 @@ const reformatDate = (date) => {
   return reformattedDate
 }
 
-const createUniqueID = (bookings) => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let randomID = '';
-
-  for (let i = 0; i < 17; i++) {
-    randomID += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-
-  if (bookings.some(booking => booking['id'] == randomID)) {
-    return createUniqueID(bookings);
-  }
-
-  return randomID;
-}
 
 
 const bookRoom = (date, room, bookings, user) => {
@@ -49,7 +35,6 @@ const bookRoom = (date, room, bookings, user) => {
 export {
   checkAvailability,
   filterByRoomType,
-  createUniqueID,
   bookRoom,
   reformatDate
 }

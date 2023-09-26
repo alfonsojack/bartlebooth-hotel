@@ -1,4 +1,4 @@
-import { findBookings, calculateSpending, formatDate, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
+import { findBookings, calculateSpending, formatDate } from './user-functions'
 
 const loginError = document.querySelector('.login-error')
 const mainPage = document.querySelector('.main-page')
@@ -8,7 +8,6 @@ const mySpendingTitle = document.querySelector('#my-spending')
 const greeting = document.querySelector('#greeting')
 const dashboardNav = document.querySelector('#dashboard-nav')
 const booknowNav = document.querySelector('#book-now-nav')
-const dashboard = document.querySelector('.dashboard')
 const bookNow = document.querySelector('.book-now')
 const calendarForm = document.querySelector('.calendar-form')
 const availableBookings = document.querySelector('#available-bookings')
