@@ -166,8 +166,8 @@ h1 {
   margin: 0 auto; 
   letter-spacing: .15em; 
   animation: 
-    typing 6s steps(40, end),
-    blink-caret 1s step-end;
+    typing 7s steps(40, end),
+    blink-caret .5s step-end;
 }
 
 

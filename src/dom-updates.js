@@ -1,4 +1,4 @@
-import { findBookings, calculateSpending, formatDate, removeCustomerPrefix, getUser, handleLogin } from './user-functions'
+import { findBookings, calculateSpending, formatDate } from './user-functions'
 
 const loginError = document.querySelector('.login-error')
 const mainPage = document.querySelector('.main-page')
@@ -8,7 +8,6 @@ const mySpendingTitle = document.querySelector('#my-spending')
 const greeting = document.querySelector('#greeting')
 const dashboardNav = document.querySelector('#dashboard-nav')
 const booknowNav = document.querySelector('#book-now-nav')
-const dashboard = document.querySelector('.dashboard')
 const bookNow = document.querySelector('.book-now')
 const calendarForm = document.querySelector('.calendar-form')
 const availableBookings = document.querySelector('#available-bookings')
@@ -53,9 +52,9 @@ const displayLoginAttempt = (loggedUser, bookings, rooms) => {
     loginError.classList.toggle('hidden', true);
     loginBox.classList.toggle('hidden', true);
     mainPage.classList.toggle('hidden', false);
-    greeting.innerHTML = `<h2 tabindex="0" id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>.</h2>`
-    let userBookings = findBookings(loggedUser, bookings);
     let userSpending = calculateSpending(loggedUser, bookings, rooms);
+    greeting.innerHTML = `<h2 tabindex="0" id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>. Your total spending is <span class="name">$${userSpending}</span>.</h2>`
+    let userBookings = findBookings(loggedUser, bookings);
     displayDashboard(userBookings, userSpending)
   }
 }
