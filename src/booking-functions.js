@@ -26,7 +26,6 @@ const bookRoom = (date, room, bookings, user) => {
     "date": date,
     "roomNumber": room * 1
   }
-  console.log(newBooking)
   bookings.push(newBooking);
   return newBooking
 }

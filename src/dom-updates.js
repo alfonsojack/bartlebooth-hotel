@@ -52,9 +52,9 @@ const displayLoginAttempt = (loggedUser, bookings, rooms) => {
     loginError.classList.toggle('hidden', true);
     loginBox.classList.toggle('hidden', true);
     mainPage.classList.toggle('hidden', false);
-    greeting.innerHTML = `<h2 tabindex="0" id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>.</h2>`
-    let userBookings = findBookings(loggedUser, bookings);
     let userSpending = calculateSpending(loggedUser, bookings, rooms);
+    greeting.innerHTML = `<h2 tabindex="0" id="greeting"> Welcome back, <span class="name">${loggedUser['name'].split(' ', 1)}</span>. Your total spending is <span class="name">$${userSpending}</span>.</h2>`
+    let userBookings = findBookings(loggedUser, bookings);
     displayDashboard(userBookings, userSpending)
   }
 }
