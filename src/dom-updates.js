@@ -77,6 +77,10 @@ const displayAvailability = (availableRooms) => {
   calendarError.classList.toggle('hidden', true)
   availabilityDisplay.classList.toggle('hidden', false)
   availableBookings.innerHTML = ''
+  if (availableRooms.length == 0) {
+    calendarError.innerText = 'No rooms available'
+    calendarError.classList.toggle('hidden', false)
+  }
   availableRooms.forEach(room => 
     availableBookings.innerHTML += `<article class="bookings-card" id="available-card" tabindex="0"><menu><li tabindex="0">Room Type: ${room['roomType']}</li><li>Bed: ${room['numBeds']} ${room['bedSize']}</li><li tabindex="0">Price: $${room['costPerNight'].toFixed(2)} per night</li></menu><button tabindex="0" class="book-now-btn" id="${room['number']}">Book Now</button></article>`)
 }
