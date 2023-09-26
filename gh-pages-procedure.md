@@ -11,8 +11,8 @@ Here is a general procedure for getting your project hosted on GitHub pages so y
 
 ## Required Steps
 
-1. In the `package.json` file, within the `"repository"` object, edit the `"url"` value to be `"git+https://github.com/USERNAME/REPONAME.git"` where USERNAME and REPONAME are replaced with your GitHub username and your repository name, respectively
-1. In the `package.json` file, add the line: `"homepage": "http://USERNAME.github.io/REPONAME",` where USERNAME and REPONAME are replaced with your GitHub username and your repository name, respectively
+1. In the `package.json` file, within the `"repository"` object, edit the `"url"` value to be `"git+https://github.com/alfonsojack/bartlebooth-hotel.git"` where USERNAME and REPONAME are replaced with your GitHub username and your repository name, respectively
+1. In the `package.json` file, add the line: `"homepage": "http://alfonsojack.github.io/bartlebooth-hotel",` where USERNAME and REPONAME are replaced with your GitHub username and your repository name, respectively
 1. Add these two lines to the `scripts` section of the `package.json` file:
   ```json
   "predeploy": "npm run build",

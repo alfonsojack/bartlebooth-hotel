@@ -14,15 +14,15 @@
     <h2>Login</h2>
     <form>
       <div class="user-box">
-        <input type="text" id="username" name="username" required="">
-        <label>Username</label>
+        <input type="text" id="username" name="username" tabindex="0" required="">
+        <label for="username">Username</label>
       </div>
       <div class="user-box">
-        <input type="password" id="password" name="password" required="">
-        <label>Password</label>
+        <input type="password" id="password" name="password" tabindex="0" required="">
+        <label for="password">Password</label>
       </div>
-      <p class="login-error hidden"></p>
-      <a href="#" id="custom-submit">
+      <p class="login-error hidden" tabindex="0"></p>
+      <a href="#" tabindex="0" id="custom-submit">
         <span></span>
         <span></span>
         <span></span>
@@ -33,30 +33,31 @@
   </div>
   <div class="main-page hidden">
     <div class="top">
-      <h1>The Bartlebooth Hotel</h1>
+      <h1 tabindex="0">The Bartlebooth Hotel</h1>
       <div id="greeting"></div>
       <div class="nav-style">
       <nav>
         <ul>
-          <li class="nav-link active" id="dashboard-nav"><a href=""><span></span>Dashboard</a></li>
-          <li class="nav-link" id="book-now-nav"><a href=""><span></span>Book Now</a></li>
+          <li class="nav-link active" id="dashboard-nav"><a tabindex="0" href=""><span></span>Dashboard</a></li>
+          <li class="nav-link" id="book-now-nav"><a tabindex="0" href=""><span></span>Book Now</a></li>
         </ul>
       </nav>
       </div>
     </div>  
     <section class="dashboard hidden">
       <div id="bookings-display">
-      <h2 id="bookings">Bookings</h2>
+      <h2 id="bookings" tabindex="0">Bookings</h2>
       <section id="my-bookings"></section>
-      <article id="spending"><h3 class="article-head">Total Spending:</h3><p id="my-spending"></p></article>
+      <article id="spending"><h3 class="article-head" tabindex="0">Total Spending:</h3><p tabindex="0" id="my-spending"></p></article>
     </div>
     </section>
     <section class="book-now hidden">
     <div class="calendar-form hidden">
-      <form id="calendar-box">  
-        <input class="calendar" type="date"/>
-        <p class="calendar-error hidden">Please select a date</p>
-        <a href="#" id="submit-button">
+      <form tabindex="0" id="calendar-box">  
+        <label id="cal-label" for="calendar">Calendar</label>
+        <input tabindex="0" class="calendar" id="calendar" type="date"/>
+        <p tabindex="0" class="calendar-error hidden">Please select a date</p>
+        <a tabindex="0" href="#" id="submit-button">
           Check Availability
         </a>
       </form>
@@ -65,11 +66,11 @@
       <div class="filter-style hidden">
         <nav>
           <ul>
-            <li class="filter-link active" id="all"><a href=""><span></span>All</a></li>
-            <li class="filter-link" id="suite"><a href=""><span></span>Suite</a></li>
-            <li class="filter-link" id="residential-suite"><a href=""><span></span>Residential Suite</a></li>
-            <li class="filter-link" id="junior-suite"><a href=""><span></span>Junior Suite</a></li>
-            <li class="filter-link" id="single-room"><a href=""><span></span>Single Room</a></li>
+            <li class="filter-link active" id="all"><a tabindex="0" href=""><span></span>All</a></li>
+            <li class="filter-link" id="suite"><a tabindex="0" href=""><span></span>Suite</a></li>
+            <li class="filter-link" id="residential-suite"><a tabindex="0" href=""><span></span>Residential Suite</a></li>
+            <li class="filter-link" id="junior-suite"><a tabindex="0" href=""><span></span>Junior Suite</a></li>
+            <li class="filter-link" id="single-room"><a tabindex="0" href=""><span></span>Single Room</a></li>
           </ul>
         </nav>
       </div>
