@@ -25,8 +25,13 @@ This application pulls hotel booking, room, and user information from a database
 <br>
 
 ### Client App Setup
-- Navigate to the [deployed Bartlebooth Hotel page](http://alfonsojack.github.io/bartlebooth-hotel)
-
+- Open a separate tab in your terminal using `command T`
+- Navigate to [the front end](https://github.com/alfonsojack/bartlebooth-hotel.git) repository. 
+- Clone it to your local machine using the command: `git clone git@github.com:alfonsojack/bartlebooth-hotel.git`.
+- Run the command: `cd bartlebooth-hotel`
+- Run the command: `npm install`
+- Run the command: `npm start`
+- Once the modules have finished compiling, enter `http://localhost:8080/` into your browser to see the live web page. 
 
 ## Preview of App
 
